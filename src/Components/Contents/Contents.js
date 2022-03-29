@@ -166,7 +166,7 @@ const ContentsContainer = styledComponents.div`
 `
 const MoviesSlider = styledComponents.div`
     display: grid;
-    grid-template-columns: repeat(${movies.length}, 300px);
+    grid-template-columns: repeat(${movies.length}, 360px);
     gap: 6px;
     transition: all 0.3s linear;
     user-select: none;
@@ -175,6 +175,15 @@ const MoviesSlider = styledComponents.div`
     overflow: hidden;
     padding: 28px 0;
     scroll-behavior: smooth;
+    @media screen and (max-width: 1200px){
+        grid-template-columns: repeat(${movies.length}, 300px);
+    }
+    @media screen and (max-width: 992px){
+        grid-template-columns: repeat(${movies.length}, 250px);
+    }
+    @media screen and (max-width: 768px){
+        grid-template-columns: repeat(${movies.length}, 200px);
+    }
     &:hover .movieItem{
         opacity: 0.5;
     }
