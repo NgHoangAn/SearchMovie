@@ -13,3 +13,6 @@ a{
     --color-white: rgb(220,218,218);
     --color-background: rgb(17,17,17);
 }
+body{
+    font-family: 'Ubuntu', sans-serif;
+}
