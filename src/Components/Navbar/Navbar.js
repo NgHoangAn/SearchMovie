@@ -28,6 +28,7 @@ const Navigation = styledComponents.div`
     top: 0;
     transition-timing-function: ease-in;
     transition: all 1s;
+    z-index: 1;
     @media only screen and (max-width: 600px){
         height: 100px;
     }

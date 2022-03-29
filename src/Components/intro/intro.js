@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactPlayer from 'react-player'
-import { VscMute, VscUnMute } from 'react-icons/vsc';
+import { VscMute, VscUnmute } from 'react-icons/vsc';
 import styledComponents from 'styled-components';
 function Intro(props) {
+    const [isMute, setIsMute] = useState(true)
   return (
     <INtroContainer>
         <ReactPlayer 
@@ -11,15 +12,24 @@ function Intro(props) {
             width="100%"
             height="100%"
             volumn={1}
-            loop={true}
-            mute={false}
-            url="https://vimeo.com/591652085"
+            
+            muted={isMute}
+            url="https://www.youtube.com/watch?v=Aoy1cHOUaSs"
         />
         <div className="intro">
             <h1 className="headingIntro">Netflix Elite</h1>
             <p className="overviewIntro">loren isomf dfvng english basic skill jascrips sdk dfnvn</p>
         </div>
-        <VscMute/>
+        {
+            isMute ? (
+                <VscMute className="btnVolume" 
+                    onClick = {() => setIsMute(prew=>!prew)}/>
+            ) : (
+                <VscUnmute className="btnVolume" 
+                    onClick = {() => setIsMute(prew=>!prew)}/>
+                )
+        }
+        <div className="fadeIntroVideo"></div>
     </INtroContainer>
   )
 }
@@ -71,5 +81,46 @@ const INtroContainer = styledComponents.div`
                 font-size: 14px;
             }
         }
+    }
+    .btnVolume{
+        position: absolute;
+        height: 40px;
+        width: 40px;
+        right: 10%;
+        top: 50%;
+        cursor: pointer;
+        border-radius: 50%;
+        padding: 6px;
+        color: #bbb;
+        border: 1px #fff solid;
+        transition: all 0.3s ease;
+        transform: scale(1);
+        &:hover{
+            color: #fff;
+            transform: scale(1.2);
+            background-color: rgba(255,211,211,0.18);
+        }
+        @media screen and (max-width: 800px){
+            height: 30px;
+            width: 30px;
+            padding: 4px;
+        }
+        @media screen and (max-width: 600px){
+            height: 20px;
+            width: 20px;
+            padding: 1px;
+        }
+    }
+    .fadeIntroVideo{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100px;
+        backgrround-image: linear-gradient(
+            180deg,
+            transparent,
+            rgba(15,15,15,0.6) 40%,
+            rbg(17,17,17)
+        )
     }
 `
