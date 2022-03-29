@@ -13,7 +13,7 @@ function Intro(props) {
             width="100%"
             height="100%"
             volumn={1}
-            
+            loop={true}
             muted={isMute}
             url={trailer}
         />
@@ -117,11 +117,11 @@ const INtroContainer = styledComponents.div`
         bottom: 0;
         width: 100%;
         height: 100px;
-        backgrround-image: linear-gradient(
+        background-image: linear-gradient(
             180deg,
             transparent,
             rgba(15,15,15,0.6) 40%,
-            rbg(17,17,17)
+            rgb(17,17,17)
         )
     }
 `

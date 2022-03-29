@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from '../../assets/images/logo.png'
 import { MdSearch } from 'react-icons/md';
 import styledComponents from 'styled-components';
+import { useScrollY } from '../hooks'
 function Navbar(props) {
+    const [scrollY] = useScrollY();
   return (
-    <Navigation>
+    <Navigation style={scrollY < 50 ? {backgroundColor: 'transparent'} : {backgroundColor: 'var(--color-background)'}}>
         <div className="navContainer">
             <div className="logo">
                 <img src={logo} alt="" />
@@ -33,7 +35,7 @@ const Navigation = styledComponents.div`
         height: 100px;
     }
     .navContainer{
-        background-color: var(--color-background);
+        background-color: transparent;
         display: flex;
         align-items: center;
         justify-content: flex-start;
