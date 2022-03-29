@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ReactPlayer from 'react-player'
 import { VscMute, VscUnmute } from 'react-icons/vsc';
 import styledComponents from 'styled-components';
+import trailer  from '../../assets/video/Money-heist-ss5.mp4'
 function Intro(props) {
     const [isMute, setIsMute] = useState(true)
   return (
@@ -14,7 +15,7 @@ function Intro(props) {
             volumn={1}
             
             muted={isMute}
-            url="https://www.youtube.com/watch?v=Aoy1cHOUaSs"
+            url={trailer}
         />
         <div className="intro">
             <h1 className="headingIntro">Netflix Elite</h1>
