@@ -1,5 +1,6 @@
 
 import './App.css';
+import Contents from './Components/Contents/Contents.js';
 import Intro from './Components/intro/intro';
 import Navbar from './Components/Navbar/Navbar';
 
@@ -8,24 +9,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Intro />
-      <div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div><div>sdasd</div>
-      <div>dcdcd</div>
+      <Contents />
     </div>
   );
 }
