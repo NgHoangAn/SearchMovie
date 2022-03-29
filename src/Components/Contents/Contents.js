@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styledComponents from 'styled-components'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { SmoothHorizontalScrolling } from '../../utils' 
 const movies = [
     "https://cdnb.artstation.com/p/assets/images/images/017/317/689/large/toan-juno-final.jpg?1555483923",
     "https://upload.wikimedia.org/wikipedia/vi/d/df/Arrival%2C_Movie_Poster.jpg",
@@ -15,24 +16,77 @@ const movies = [
     "https://i.pinimg.com/736x/66/80/87/6680870200ce78c6e920bc341a9f0dd2--movies-to-watch-new-movies.jpg",
 ]
 function Contents(props) {
+    const sliderRef = useRef();
+    const movieRef = useRef();
+    const [dragDown, setDragDown] = useState(0)
+    const [dragMove, setDragMove] = useState(0)
+    const [isDrag, setIsDrag] = useState(false)
     
+       // console.log(sliderRef.current.scrollWidth);
+    
+
+    const handleScrollRight = () => {
+        const maxScrollWidth = sliderRef.current.scrollWidth;
+    const clientScrollWidth = sliderRef.current.clientWidth;
+    const currScrollLeft = sliderRef.current.scrollLeft;
+        const scrollWidthLeft = maxScrollWidth - clientScrollWidth;
+       //console.log(maxScrollLeft);
+       if(currScrollLeft < scrollWidthLeft){
+           SmoothHorizontalScrolling(
+               sliderRef.current, 
+               250, 
+               movieRef.current.clientWidth * 2,//move 2 step 
+               currScrollLeft)
+       }
+    }
+    const handleScrollLeft = () => {
+        const currScrollLeft = sliderRef.current.scrollLeft;
+       if(currScrollLeft > 0){
+           SmoothHorizontalScrolling(
+               sliderRef.current, 
+               250, 
+               -movieRef.current.clientWidth * 2,//move 2 step 
+               currScrollLeft)
+       }
+    }
+    useEffect(() =>{
+        if(isDrag){
+            if(dragMove < dragDown) handleScrollRight();
+            if(dragMove > dragDown) handleScrollLeft();
+        }
+    },[dragDown,dragMove,isDrag])
+    const onDragStart = e => {
+        setIsDrag(true);
+        setDragDown(e.screenX);
+    }
+    const onDragEnd = e => {
+        setIsDrag(false);
+    }
+    const onDragEnter = e => {
+        setDragMove(e.screenX);
+    }
   return (
-    <ContentsContainer>
-        <h1 className="headingContent">Netflix Originals</h1>
-        <MoviesSlider>
+    <ContentsContainer draggable='false'>
+        <h1 className="headingContents">Netflix Originals</h1>
+        <MoviesSlider 
+            onDragStart={onDragStart}
+            onDragEnd={onDragEnd}
+            onDragEnter={onDragEnter}
+            ref={sliderRef} 
+            draggable='true'>
             {
                 movies.map((movie, index) =>(
-                    <div key={index} className="movieItem">
-                        <img src={movie} alt="" />
+                    <div key={index} className="movieItem" ref={movieRef} draggable='false'>
+                        <img src={movie} alt="" draggable='false'/>
                         <div className="movieName">Movie name</div>
                     </div>
                 ))
             } 
         </MoviesSlider>
-        <div className="btnLeft">
+        <div className="btnLeft" onClick={handleScrollLeft}>
             <FiChevronLeft />
         </div>
-        <div className="btnRight"><FiChevronRight/></div>
+        <div className="btnRight" onClick={handleScrollRight}><FiChevronRight/></div>
     </ContentsContainer>
   )
 }
@@ -46,7 +100,7 @@ const ContentsContainer = styledComponents.div`
     position: relative;
     width: 100%;
     height: 100%;
-    .headingCOntents{
+    .headingContents{
         font-size: 18px;
         user-select: none;
     }
