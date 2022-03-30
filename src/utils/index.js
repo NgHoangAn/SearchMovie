@@ -14,3 +14,10 @@ export function SmoothHorizontalScrolling(e,time,amount,start){
 function SHS_B(e,sc,eAmt,start,y){
     e.scrollLeft = eAmt* sc + start;
 }
+export function randomRgbaColor (opacity){
+    const R =Math.round(Math.random() * 250);
+    const G =Math.round(Math.random() * 250);
+    const B =Math.round(Math.random() * 250);
+    let color = `rgba(${R}, ${G}, ${B}, ${opacity})`;
+    return color;
+}
