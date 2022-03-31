@@ -9,12 +9,15 @@ const initialState = {
     HorrorMovie: null,
     DocumentMovie: null,
     RomanceMovie: null,
+    MoviesDetail: null,
 }
 
 const reducerMovies = (state = initialState, { type, payload }) => {
   switch (type) {
       case Types.GET_NETFLIT_ORIGINALS:
         return {...state, NeflitOriginal: payload }
+      case Types.GET_TRENDING_MOVIES:
+        return {...state, TrendingMovie: payload }
 
       case Types.GET_TOPRATED_MOVIES:
         return {...state, TopRatedMovie: payload }
@@ -33,11 +36,9 @@ const reducerMovies = (state = initialState, { type, payload }) => {
 
       case Types.GET_ROMANCE_MOVIES:
           return {...state, RomanceMovie: payload }
-
-      case Types.GET_TRENDING_MOVIES:
-          return {...state, TrendingMovie: payload }
-
-  default:
+      case Types.SET_MOVIE_DETAIL:
+          return {...state, MoviesDetail: payload }
+    default:
     return state
   }
 }

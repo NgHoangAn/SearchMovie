@@ -3,7 +3,8 @@ import styledComponents from 'styled-components'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { SmoothHorizontalScrolling } from '../../utils' 
 import { useViewport } from '../hooks/useViewport';
-
+import { useDispatch } from 'react-redux';
+import { setMovieDetail } from '../Store/actions';
 function MoviesRow(props) {
     const sliderRef = useRef();
     const movieRef = useRef();
@@ -13,8 +14,8 @@ function MoviesRow(props) {
     const [isDrag, setIsDrag] = useState(false)
     const [windowWidth] = useViewport();
        // console.log(sliderRef.current.scrollWidth);
+    const dispatch = useDispatch();
     
-
     const handleScrollRight = () => {
         const maxScrollWidth = sliderRef.current.scrollWidth;
     const clientScrollWidth = sliderRef.current.clientWidth;
@@ -38,6 +39,10 @@ function MoviesRow(props) {
                -movieRef.current.clientWidth * 2,//move 2 step 
                currScrollLeft)
        }
+    }
+    const handleSetMovie = (movieId) => {
+        //console.log(movieId)
+        dispatch(setMovieDetail(movieId));
     }
     useEffect(() =>{
         if(isDrag){
@@ -81,7 +86,13 @@ function MoviesRow(props) {
                         let imageUrl = isNetflix ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
                         : `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
                         return(
-                            <div key={index} className="movieItem" ref={movieRef} draggable='false'>
+                            <div 
+                                key={index} 
+                                className="movieItem" 
+                                ref={movieRef} 
+                                draggable='false'
+                                onClick={() => handleSetMovie(movie.id)}
+                            >
                                 <img src={imageUrl} alt="" draggable='false'/>
                                 <div className="movieName">{movie.title || movie.name}</div>
                             </div>

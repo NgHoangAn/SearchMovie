@@ -7,8 +7,9 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 export const getNetflixOriginals = () => async dispatch => {
     try{
         const result = await axios.get(
-            `${BASE_URL}/discover/tv?api_key=${API_LEY}&page=2&with_watch_monetization_types=flatrate`
+            `${BASE_URL}/discover/movie?api_key=${API_LEY}&page=1&with_watch_monetization_types=free`
         )
+        console.log(result.data)
         dispatch({type: Types.GET_NETFLIT_ORIGINALS, payload: result.data.results})
     } catch(error){
         console.log('get poster error:',error);
@@ -82,5 +83,20 @@ export const getDOcumentMovies = () => async dispatch => {
         dispatch({type: Types.GET_DOCUMENT_MOVIES, payload: result.data.results})
     } catch(error){
         console.log('get Top Document error:',error);
+    }
+}
+
+export const setMovieDetail = (movieId) => async dispatch => { 
+    if(movieId){
+        try{
+            const result = await axios.get(
+                `${BASE_URL}/movie/${movieId}?api_key=${API_LEY}&language=en-US`
+            )
+            dispatch({type: Types.SET_MOVIE_DETAIL, payload: result.data})
+        } catch(error){
+            console.log('get Top Document error:',error);
+        }
+    } else {
+        dispatch({type: Types.SET_MOVIE_DETAIL, payload: null})
     }
 }

@@ -45,15 +45,14 @@ function Contents(props) {
   const ScrollToTop = () => {
     scroll.scrollToTop();
   }
-  console.log(NeflitOriginal);
   return (
     <div>
-        <MoviesRow movies={NeflitOriginal} title="Netflix Originals" isNetflix idSection = 'netflix'/>
+        <MoviesRow movies={NeflitOriginal} title="Discovery Movies" isNetflix idSection = 'netflix'/>
         <MoviesRow movies={TrendingMovie} title="Trending Movies" idSection = 'trending'/>
-        <MoviesRow movies={TopRatedMovie} title="Netflix Originals" idSection = 'toprated'/>
-        <MoviesRow movies={ActionsMovie} title="Netflix Originals" idSection = 'action'/>
-        <MoviesRow movies={ComedyMovie} title="Netflix Originals" idSection = 'comedy'/>
-        <MoviesRow movies={HorrorMovie} title="Netflix Originals" idSection = 'horror'/>
+        <MoviesRow movies={TopRatedMovie} title="Top Rated Movies" idSection = 'toprated'/>
+        <MoviesRow movies={ActionsMovie} title="Action Movies" idSection = 'action'/>
+        <MoviesRow movies={ComedyMovie} title="Comedy Movies" idSection = 'comedy'/>
+        <MoviesRow movies={HorrorMovie} title="Horror Movies" idSection = 'horror'/>
         <MoviesRow movies={RomanceMovie} title="Romance Movies" idSection = 'romance'/>
         <MoviesRow movies={DocumentMovie} title="Document Movies" idSection = 'document'/>
         <GoToTop 

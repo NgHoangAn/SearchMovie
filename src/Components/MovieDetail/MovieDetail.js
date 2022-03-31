@@ -1,29 +1,44 @@
+import moment from 'moment';
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import styledComponents from 'styled-components'
 import { keyframes } from 'styled-components';
+import { setMovieDetail } from '../Store/actions';
 
-const showModal = true;
-function MovieDetail() {
+function MovieDetail(props) {
+    const {movie, showModal} = props;
+    
+    const dispatch = useDispatch();
+
+    const handleCloseModal = () => {
+        dispatch(setMovieDetail(null))
+    };
   return (
     <MovieDetailModal>
-        <div className={`backdrop ${showModal ? 'showBackdrop' : 'hideBackdrop'}`} ></div>
+        <div className={`backdrop ${showModal ? 'showBackdrop' : 'hideBackdrop'}`}
+            onClick={handleCloseModal}
+        >
+
+        </div>
             <div 
                 className={`modal ${showModal ? 'showModal' : 'hideModal'}`}
-                style={{
-                    backgroundImage: `url(https://vcdn-giaitri.vnecdn.net/2022/03/22/the-witcher-9901-1639974315-1166-1647916691.jpg)`,
+                style={
+                    movie ? {
+                    backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.poster_path || movie.backdrop_path})`,
                     backgroundSize: 'cover'
-                }}
+                    } : {}
+                }
             >
                 <div className="container">
                     <div className="movieInfo">
-                        <h1 className="movieTitle">The Witches</h1>
+                        <h1 className="movieTitle">{movie && (movie.title || movie.name)}</h1>
                         <p className="statistical">
-                            <span className="rating">Rating: 82%</span>
-                            <span className="popularity">Popularity: 123.456</span>
+                            <span className="rating">Rating: {movie && movie.vote_average * 10}%</span>
+                            <span className="popularity">Popularity: {movie && movie.popularity}</span>
                         </p>
-                        <p className="releaseDate">Release Date: 21/12/2021</p>
-                        <p className="runtime">Runtime: m</p>
-                        <p className="overview">Release Date</p>
+                        <p className="releaseDate">Release Date: {movie && (moment(movie.release_date).format('DD/MM/YYYY') || moment(movie.first_air_date).format('DD/MM/YYYY'))}</p>
+                        <p className="runtime">Runtime: {movie && (movie.runtime || movie.episode_run_time)} minutes</p>
+                        <p className="overview">{movie && movie.overview}</p>
                     </div>
                 </div>
             </div>

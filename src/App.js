@@ -1,4 +1,5 @@
 
+import { useSelector } from 'react-redux';
 import './App.css';
 import Contents from './Components/Contents/Contents.js';
 import Intro from './Components/intro/intro';
@@ -7,13 +8,16 @@ import MovieDetail from './Components/MovieDetail/MovieDetail';
 import Navbar from './Components/Navbar/Navbar';
 
 function App() {
+  const { MoviesDetail } = useSelector(state => state.infoMovies)
   return (
     <div className="App">
       <Navbar />
-      <Intro />
+      {/* <Intro />
       <Contents />
       <Menu/>
-      <MovieDetail/>
+      <MovieDetail 
+        movie={MoviesDetail} 
+        showModal={MoviesDetail ? true : false}/> */}
     </div>
   );
 }
