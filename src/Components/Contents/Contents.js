@@ -2,6 +2,10 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../Store/actions';
 import MoviesRow from './MoviesRow'
+import { FaArrowAltCircleUp } from 'react-icons/fa';
+import styledComponents from 'styled-components';
+import { animateScroll as scroll } from 'react-scroll';
+import { useScrollY } from '../hooks/useScrollY'
 // const movies = [
 //     "https://cdnb.artstation.com/p/assets/images/images/017/317/689/large/toan-juno-final.jpg?1555483923",
 //     "https://upload.wikimedia.org/wikipedia/vi/d/df/Arrival%2C_Movie_Poster.jpg",
@@ -18,6 +22,7 @@ import MoviesRow from './MoviesRow'
 
 function Contents(props) {
   const dispatch = useDispatch();
+  const [scrollY] = useScrollY();
   const { NeflitOriginal,
     TrendingMovie,
     TopRatedMovie,
@@ -37,18 +42,28 @@ function Contents(props) {
     dispatch(actions.getHorrorMovies());
     dispatch(actions.getDOcumentMovies());
   },[dispatch])
+  const ScrollToTop = () => {
+    scroll.scrollToTop();
+  }
   console.log(NeflitOriginal);
   return (
     <div>
-        <MoviesRow movies={NeflitOriginal} title="Netflix Originals" isNetflix/>
-        <MoviesRow movies={TrendingMovie} title="Trending Movies" />
-        <MoviesRow movies={TopRatedMovie} title="Netflix Originals" />
-        <MoviesRow movies={ActionsMovie} title="Netflix Originals" />
-        <MoviesRow movies={ComedyMovie} title="Netflix Originals" />
-        <MoviesRow movies={HorrorMovie} title="Netflix Originals" />
-        <MoviesRow movies={RomanceMovie} title="Netflix Originals" />
-        <MoviesRow movies={DocumentMovie} title="Netflix Originals" />
-
+        <MoviesRow movies={NeflitOriginal} title="Netflix Originals" isNetflix idSection = 'netflix'/>
+        <MoviesRow movies={TrendingMovie} title="Trending Movies" idSection = 'trending'/>
+        <MoviesRow movies={TopRatedMovie} title="Netflix Originals" idSection = 'toprated'/>
+        <MoviesRow movies={ActionsMovie} title="Netflix Originals" idSection = 'action'/>
+        <MoviesRow movies={ComedyMovie} title="Netflix Originals" idSection = 'comedy'/>
+        <MoviesRow movies={HorrorMovie} title="Netflix Originals" idSection = 'horror'/>
+        <MoviesRow movies={RomanceMovie} title="Romance Movies" idSection = 'romance'/>
+        <MoviesRow movies={DocumentMovie} title="Document Movies" idSection = 'document'/>
+        <GoToTop 
+          onClick={() => ScrollToTop()}
+          style={{
+            visibility: `${scrollY > 600 ? 'visible' : 'hidden'}`
+          }}
+        >
+          <FaArrowAltCircleUp/>
+        </GoToTop>
 
 
     </div>
@@ -56,3 +71,19 @@ function Contents(props) {
 }
 
 export default Contents
+
+const GoToTop = styledComponents.div`
+  position: fixed;
+  z-index: 15;
+  right: 70px;
+  bottom: 50px;
+  font-size: 50px;
+  color: rgba(255, 255, 255,.4);
+  transition: all 0.5 linear;
+  &:hover{
+    color: rgba(255, 255, 255,.8);  
+  }
+  @media screen and (max-width:600px){
+    right: 40px;
+  }
+`

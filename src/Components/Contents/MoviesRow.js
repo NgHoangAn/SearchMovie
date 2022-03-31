@@ -7,7 +7,7 @@ import { useViewport } from '../hooks/useViewport';
 function MoviesRow(props) {
     const sliderRef = useRef();
     const movieRef = useRef();
-    const {movies, title, isNetflix} = props;
+    const {movies, title, isNetflix, idSection} = props;
     const [dragDown, setDragDown] = useState(0)
     const [dragMove, setDragMove] = useState(0)
     const [isDrag, setIsDrag] = useState(false)
@@ -56,7 +56,7 @@ function MoviesRow(props) {
         setDragMove(e.screenX);
     }
   return (
-    <ContentsContainer draggable='false'>
+    <ContentsContainer draggable='false' id={idSection}>
         <h1 className="headingContents" >{title}</h1>
         <MoviesSlider 
             onDragStart={onDragStart}
