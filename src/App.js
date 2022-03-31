@@ -6,6 +6,7 @@ import Intro from './Components/intro/intro';
 import Menu from './Components/Menu/Menu';
 import MovieDetail from './Components/MovieDetail/MovieDetail';
 import Navbar from './Components/Navbar/Navbar';
+import SearchMovies from './Components/SearchMovies/SearchMovies';
 
 function App() {
   const { MoviesDetail } = useSelector(state => state.infoMovies)
@@ -18,6 +19,7 @@ function App() {
       <MovieDetail 
         movie={MoviesDetail} 
         showModal={MoviesDetail ? true : false}/> */}
+      <SearchMovies/>
     </div>
   );
 }
