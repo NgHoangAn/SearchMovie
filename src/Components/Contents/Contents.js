@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getNetflixOriginals } from '../Store/actions';
+import * as actions from '../Store/actions';
 import MoviesRow from './MoviesRow'
 // const movies = [
 //     "https://cdnb.artstation.com/p/assets/images/images/017/317/689/large/toan-juno-final.jpg?1555483923",
@@ -18,15 +18,37 @@ import MoviesRow from './MoviesRow'
 
 function Contents(props) {
   const dispatch = useDispatch();
-  const { NeflitOriginal } = useSelector(state => state.infoMovies)
+  const { NeflitOriginal,
+    TrendingMovie,
+    TopRatedMovie,
+    ActionsMovie,
+    ComedyMovie,
+    HorrorMovie,
+    DocumentMovie,
+    RomanceMovie } = useSelector(state => state.infoMovies)
 
   useEffect(() =>{
-    dispatch(getNetflixOriginals());
+    dispatch(actions.getNetflixOriginals());
+    dispatch(actions.getTrendingMovies());
+    dispatch(actions.getTopRatedMovies());
+    dispatch(actions.getActionMovies());
+    dispatch(actions.getComedyMovies());
+    dispatch(actions.getRomanceMovies());
+    dispatch(actions.getHorrorMovies());
+    dispatch(actions.getDOcumentMovies());
   },[dispatch])
   console.log(NeflitOriginal);
   return (
     <div>
         <MoviesRow movies={NeflitOriginal} title="Netflix Originals" isNetflix/>
+        <MoviesRow movies={TrendingMovie} title="Trending Movies" />
+        <MoviesRow movies={TopRatedMovie} title="Netflix Originals" />
+        <MoviesRow movies={ActionsMovie} title="Netflix Originals" />
+        <MoviesRow movies={ComedyMovie} title="Netflix Originals" />
+        <MoviesRow movies={HorrorMovie} title="Netflix Originals" />
+        <MoviesRow movies={RomanceMovie} title="Netflix Originals" />
+        <MoviesRow movies={DocumentMovie} title="Netflix Originals" />
+
 
 
     </div>

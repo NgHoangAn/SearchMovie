@@ -79,7 +79,7 @@ function MoviesRow(props) {
                 movies && movies.length > 0 && movies.map((movie, index) => {
                     if(movie.poster_path && movie.backdrop_path !== null){
                         let imageUrl = isNetflix ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
-                        : `https://image.tmdb.org/t/p//w500/${movie.backdrop_path}`
+                        : `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
                         return(
                             <div key={index} className="movieItem" ref={movieRef} draggable='false'>
                                 <img src={imageUrl} alt="" draggable='false'/>
