@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import ReactPlayer from 'react-player'
 import { VscMute, VscUnmute } from 'react-icons/vsc';
 import styledComponents from 'styled-components';
-import trailer  from '../../assets/video/Money-heist-ss5.mp4'
+//import trailer  from 'https://www.youtube.com/watch?v=MBiekstWDu4&list=RDMBiekstWDu4&start_radio=1'
 function Intro(props) {
     const [isMute, setIsMute] = useState(true)
   return (
     <INtroContainer>
-        <ReactPlayer 
+        {/* <ReactPlayer 
             className="videoIntro"
             playing={true}
             width="100%"
@@ -16,7 +16,7 @@ function Intro(props) {
             loop={true}
             muted={isMute}
             url={trailer}
-        />
+        /> */}
         <div className="intro">
             <h1 className="headingIntro">Netflix Elite</h1>
             <p className="overviewIntro">loren isomf dfvng english basic skill jascrips sdk dfnvn</p>
