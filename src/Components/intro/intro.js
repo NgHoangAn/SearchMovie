@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-
+import ReactPlayer from 'react-player'
 import { VscMute, VscUnmute } from 'react-icons/vsc';
 import styledComponents from 'styled-components';
-//import trailer  from 'https://www.youtube.com/watch?v=MBiekstWDu4&list=RDMBiekstWDu4&start_radio=1'
+import trailer from '../../assets/video/intro.mp4'
 function Intro(props) {
     const [isMute, setIsMute] = useState(true)
   return (
     <INtroContainer>
-        {/* <ReactPlayer 
+        <ReactPlayer 
             className="videoIntro"
             playing={true}
             width="100%"
@@ -16,7 +16,7 @@ function Intro(props) {
             loop={true}
             muted={isMute}
             url={trailer}
-        /> */}
+        />
         <div className="intro">
             <h1 className="headingIntro">Money Heist</h1>
             <p className="overviewIntro">In this world, everything is governed by balance. There's what you stand to gain and what you stand to lose. And when you think you've got nothing to lose, you become overconfident</p>
