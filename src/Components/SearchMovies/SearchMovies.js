@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import styledComponents from 'styled-components'
 import { useViewport } from '../hooks'
+import { getSearchMovie, setMovieDetail } from '../Store/actions';
 
 const moviesList =[
     "https://cdnb.artstation.com/p/assets/images/images/017/317/689/large/toan-juno-final.jpg?1555483923",
@@ -15,12 +18,20 @@ const moviesList =[
     "https://i.pinimg.com/474x/ef/07/13/ef07138c0c4546fbb6507ebb975bb9cf--z-for-zachariah-indie-films.jpg",
     "https://i.pinimg.com/736x/66/80/87/6680870200ce78c6e920bc341a9f0dd2--movies-to-watch-new-movies.jpg",
 ]
+const useQuery = () => new URLSearchParams(useLocation().search)
 function SearchMovies() {
     const [windowWidth] = useViewport();
+    const dispatch = useDispatch();
+    const { SearchMovies } = useSelector(state => state.infoMovies);
+    const keywords = useQuery().get('keywords');
+    useEffect(() => {
+        if(keywords) dispatch(getSearchMovie(keywords));
+    },[keywords,dispatch])
+    console.log(SearchMovies);
   return (
     <SearchPane>
         {
-            moviesList && moviesList.length > 0 ? (
+            SearchMovies && SearchMovies.length > 0 ? (
                 <div className="searchContent"
             style={{
                 gridTemplateColumns: `repeat(${
@@ -32,13 +43,19 @@ function SearchMovies() {
             }}
         >
         {
-            moviesList.map((movie,index)=> (
-                
-                <div className="movieItem">
-                <img src={movie} alt="" />
-                <span>ok la ala</span>
-                </div>
-            ))
+            SearchMovies.map((movie,index)=>
+                {
+                    if(movie.backdrop_path !== null && movie.media_type !== 'person'){
+                        const imgUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                        return  (
+                            <div key={index} className="movieItem" onClick={() => dispatch(setMovieDetail(movie.id))}>
+                            <img src={imgUrl} alt={movie.title || movie.name} />
+                            <span>{movie.title || movie.name}</span>
+                            </div>
+                        )
+                    }
+                }
+            )
         }
         </div>
             ) : (
@@ -63,8 +80,8 @@ const SearchPane = styledComponents.div`
         padding: 40px 60px;
         display: grid;
         gap: 8px;
-        &:hover movieItem{
-            opacity: 0.7;
+        &:hover .movieItem{
+            opacity: 0.5;
         }
         .movieItem{
             position: relative;
