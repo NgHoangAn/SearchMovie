@@ -18,8 +18,8 @@ function Intro(props) {
             url={trailer}
         /> */}
         <div className="intro">
-            <h1 className="headingIntro">Netflix Elite</h1>
-            <p className="overviewIntro">loren isomf dfvng english basic skill jascrips sdk dfnvn</p>
+            <h1 className="headingIntro">Money Heist</h1>
+            <p className="overviewIntro">In this world, everything is governed by balance. There's what you stand to gain and what you stand to lose. And when you think you've got nothing to lose, you become overconfident</p>
         </div>
         {
             isMute ? (
