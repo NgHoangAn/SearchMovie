@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ReactPlayer from 'react-player'
+
 import { VscMute, VscUnmute } from 'react-icons/vsc';
 import styledComponents from 'styled-components';
 //import trailer  from 'https://www.youtube.com/watch?v=MBiekstWDu4&list=RDMBiekstWDu4&start_radio=1'

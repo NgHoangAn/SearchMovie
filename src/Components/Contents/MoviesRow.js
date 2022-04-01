@@ -97,8 +97,10 @@ function MoviesRow(props) {
                                 <div className="movieName">{movie.title || movie.name}</div>
                             </div>
                         )
+                    } else{
+                        return null;
                     }
-                }   
+                }  
                 )
             }
 

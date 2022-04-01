@@ -9,7 +9,7 @@ export const getNetflixOriginals = () => async dispatch => {
         const result = await axios.get(
             `${BASE_URL}/discover/movie?api_key=${API_LEY}&page=1&with_watch_monetization_types=free`
         )
-        console.log(result.data)
+      
         dispatch({type: Types.GET_NETFLIT_ORIGINALS, payload: result.data.results})
     } catch(error){
         console.log('get poster error:',error);

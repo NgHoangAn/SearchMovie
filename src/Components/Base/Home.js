@@ -18,7 +18,7 @@ function Home() {
       <Menu />
       <MovieDetail
         movie={MoviesDetail}
-        showModal={MoviesDetail ? true : false}
+        showModal={isShowMovieDetail ? true : false}
       />
     </div>
   );

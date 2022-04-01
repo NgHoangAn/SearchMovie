@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import logo from '../../assets/images/logo.png'
 import { MdSearch } from 'react-icons/md';
 import styledComponents from 'styled-components';
